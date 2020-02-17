@@ -25,7 +25,7 @@ SECRET_KEY = '6)#x%!27+6+#(!ez3tu^m(94=q_wucc#0dt53wpa1!$e5t)0v^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gescript.herokuapp.com','127.0.0.1']
 
 
 # Application definition
