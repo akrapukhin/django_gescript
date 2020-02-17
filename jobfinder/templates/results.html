@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>table, th, td {border: 1px solid black;}</style>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		{% if warning2000 %}
+		<t><i>
+		Нашлось больше 2000 вакансий ({{ num_of_vacancies_total }} вакансий). Из-за особенностей работы API HH доступны только самые свежие 2000 вакансий. 
+		Кроме того, из этих 2000 исключаются вакансии в городах, указанных в поле "Исключаемые города". 
+		Итоговое кол-во вакансий указано ниже в поле "Вакансий найдено". 
+		Если вы хотите быть уверенными в том, что по вашему запросу вернулись все вакансии, уточните запрос. 
+		Например, ограничив дату в поле "Ограничение по дате", изменив слова в запросе или изменив область поиска.
+		</i></t><br/><br/>
+		{% endif %}
+		<t>
+			<b>Вакансий найдено: </b>{{ num_vacancies }}</t>
+			<br/><t><b>Область поиска: </b>{{ included_areas }}</t>
+			<br/><t><b>Исключения: </b>{{ excluded_areas }}</t>
+			<br/><t><b>Запрос: </b>{{ query }}</t>
+			<br/><t><b>Ограничение по дате: </b>{{ date }}</t>
+			<br/><t><b>Кол-во компаний из списка на hh: </b>{{ num_of_comp }}</t>
+			<form method="get">
+                <button type="submit" class="btn btn-default">Новый поиск</button>
+            </form>
+			<br/><table style="width:100%">
+				<tr>
+					<th>#</th><th>Должность</th>
+				    <th>Компания</th>
+				    <th>Лого</th>
+				    <th>Город</th>
+				    <th>Инфо</th>
+				    <th>Зарплата</th>
+				    <th>Дата и время (мск)</th>
+				    <th>Ссылка</th>
+				</tr>
+				{% if vacancies %}
+				    {% for vac in vacancies %}
+				    <tr>
+					    <td>{{ vac.num }}</td>
+					    <td>{{ vac.title }}</td>
+					    <td>{{ vac.employer_name }}</td>
+					    <td align="center"><a href="{{ vac.emp_url }}" target="_blank"><img src="{{ vac.logo }}"></a></td>
+					    <td>{{ vac.area }}</td>
+					    <td>
+							{% if vac.in_main %} <a href="http://educationglobal.ru/ns/participant/employment/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/main_small.png" alt="Основной" title="Утвержденный перечень"></a> {% endif %}
+							{% if vac.in_sk %} <a href="http://sk.ru/net/participants/p/index.aspx" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/sk.png" alt="Сколково" title="Резидент Сколково"></a> {% endif %}
+							{% if vac.in_p218 %} <a href="http://p218.ru/winners" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/p218.png" alt="п218" title="Постановление №218"></a> {% endif %}
+							{% if vac.in_mordovia %} <a href="http://www.technopark-mordovia.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/mordovia.ico" alt="Мордовия" title="«Технопарк-Мордовия» (Саранск)"></a> {% endif %}
+							{% if vac.in_zhigul %} <a href="https://dolinatlt.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/zhiguli.png" alt="Жигули" title="Технопарк «Жигулевская долина» (Тольятти)"></a> {% endif %}
+							{% if vac.in_universitet %} <a href="http://www.uralhitech.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/universitet.ico" alt="Универ" title="Технопарк «Университетский» (Екатеринбург)"></a> {% endif %}
+							{% if vac.in_fizteh %} <a href="https://phystechpark.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/fizteh_paint.png" alt="Физтех" title="Технопарк «Физтехпарк» (Москва)"></a> {% endif %}
+							{% if vac.in_khimgrad %} <a href="https://himgrad.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/khimgrad.ico" alt="Химград" title="Технопарк «Химград» (Казань)"></a> {% endif %}
+							{% if vac.in_it_park_kazan %} <a href="https://itpark.tech/?city=kazan" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/it_park_kazan.png" alt="итКазань" title="Технопарк «ИТ-парк» (Казань)"></a> {% endif %}
+							{% if vac.in_it_park_nab_cheln %} <a href="https://itpark.tech/?city=chelny" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/it_park_nab_ch.png" alt="итНабЧел" title="Технопарк «ИТ-парк» (Набережные Челны)"></a> {% endif %}
+							{% if vac.in_rameev %} <a href="http://www.technopark-rameev.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/rameev.png" alt="Рамеев" title="Технопарк «Рамеев» (Пенза)"></a> {% endif %}
+							{% if vac.in_kuzbass %} <a href="http://technopark42.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/kuzbass.ico" alt="Кузбасс" title="«Кузбасский Технопарк» (Кемерово)"></a> {% endif %}
+							{% if vac.in_akadempark %} <a href="https://academpark.com/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/akadempark.png" alt="Академ" title="Технопарк «Академпарк» (Новосибирск)"></a> {% endif %}
+							{% if vac.in_zapsib %} <a href="http://www.tyumen-technopark.ru/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/zapsib.png" alt="Запсиб" title="«Западно-сибирский инновационный центр» (Тюменский Технопарк)"></a> {% endif %}
+							{% if vac.in_ankudinovka %} <a href="https://www.itpark-nn.com/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/ankudinovka.png" alt="Анкудиновка" title="Технопарк «Анкудиновка» (Нижний Новгород)"></a> {% endif %}
+					    </td>
+					    <td>{{ vac.salary }}</td>
+					    <td style="white-space:nowrap;">{{ vac.time }}</td>
+					    <td><a href = "{{ vac.url }}" target="_blank">{{ vac.shown_url }}</a></td>
+				    </tr>
+				    {% endfor %}
+				{% else %}
+				    <p>Вакансий не найдено.</p>
+				{% endif %}
+	</body>
+</html>
