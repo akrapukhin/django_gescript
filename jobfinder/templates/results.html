@@ -24,11 +24,12 @@
 			<br/><t><b>Исключения: </b>{{ excluded_areas }}</t>
 			<br/><t><b>Запрос: </b>{{ query }}</t>
 			<br/><t><b>Ограничение по дате: </b>{{ date }}</t>
-			<br/><t><b>Кол-во компаний из списка на hh: </b>{{ num_of_comp }}</t>
+			<br/><t><b>Кол-во компаний: </b>{{ num_of_comp }}</t>
 			<form method="get">
                 <button type="submit" class="btn btn-default">Новый поиск</button>
             </form>
 			<br/><table style="width:100%">
+				{% if vacancies %}
 				<tr>
 					<th>#</th><th>Должность</th>
 				    <th>Компания</th>
@@ -39,7 +40,7 @@
 				    <th>Дата и время (мск)</th>
 				    <th>Ссылка</th>
 				</tr>
-				{% if vacancies %}
+				
 				    {% for vac in vacancies %}
 				    <tr>
 					    <td>{{ vac.num }}</td>
