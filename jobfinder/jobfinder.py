@@ -55,6 +55,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     akadempark_ids = load_companies('companies/technoparks/akadempark.txt')
     zapsib_ids = load_companies('companies/technoparks/zapsib.txt')
     ankudinovka_ids = load_companies('companies/technoparks/ankudinovka.txt')
+    only_moscow_ids = load_companies('companies/only_moscow.txt')
+    only_spb_ids = load_companies('companies/only_spb.txt')
 
     companies_ids = main_ids + sk_ids + p218_ids + mordovia_ids + zhigul_ids + universitet_ids + fizteh_ids + khimgrad_ids + it_park_kazan_ids + it_park_nab_cheln_ids + rameev_ids + kuzbass_ids + akadempark_ids + zapsib_ids + ankudinovka_ids
     companies_ids = set(companies_ids)
@@ -100,6 +102,10 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
             for excluded_area in excluded_areas_list:
                 if excluded_area.lower() == vac['area']['name'].lower():
                     excluded = True
+            if (vac['employer']['id'] in only_moscow_ids) and not (vac['area']['name'].lower() == 'москва' or vac['area']['name'].lower() == 'зеленоград'):
+                excluded = True
+            if (vac['employer']['id'] in only_spb_ids) and not (vac['area']['name'].lower() == 'санкт-петербург'):
+                excluded = True
             if not excluded:
                 # get salary
                 salary = vac['salary']
