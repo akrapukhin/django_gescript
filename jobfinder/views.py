@@ -27,7 +27,9 @@ def query(request):
             if date_from is not None:
                 date_from = date_from.strftime("%d-%m-%Y")
             request.session['date_from'] = date_from
-            num_vacancies, num_of_vacancies_total, vacancies_list, query_str, date_str, num_of_comp_str, warning2000 = find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str)
+            exclude_quota = form.cleaned_data['exclude_quota']
+            request.session['exclude_quota'] = exclude_quota
+            num_vacancies, num_of_vacancies_total, vacancies_list, query_str, date_str, num_of_comp_str, warning2000 = find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota)
             print("vacancies_list size:")
             print(len(vacancies_list))
             context = {
@@ -51,10 +53,11 @@ def query(request):
         include_areas = request.session.get('areas', None)
         exclude_areas = request.session.get('excluded_areas', None)
         from_date = request.session.get('date_from', None)
-        if query_text is None and include_areas is None and exclude_areas is None and from_date is None:
+        excl_quota = request.session.get('exclude_quota', None)
+        if query_text is None and include_areas is None and exclude_areas is None and from_date is None and excl_quota is None:
             counter = ViewCounter.objects.filter(name='uniqueCounter')
             counter.update(counter=F('counter') + 1)
-        form = QueryForm(initial={'query_text': query_text, 'include_areas': include_areas, 'exclude_areas': exclude_areas, 'from_date': from_date})
+        form = QueryForm(initial={'query_text': query_text, 'include_areas': include_areas, 'exclude_areas': exclude_areas, 'from_date': from_date, 'exclude_quota': excl_quota})
 
     context = {
         'form': form,

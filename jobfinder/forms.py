@@ -4,10 +4,11 @@ from django import forms
 import requests
 
 class QueryForm(forms.Form):
-    query_text = forms.CharField(widget=forms.Textarea(attrs={'rows':3}), label="Запрос:", help_text="*обязательное поле")
-    include_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':3, 'placeholder': 'По умолчанию — вся Россия'}), label="Города и области поиска:", required=False, help_text = "Каждый город или область на отдельной строке")
-    exclude_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':3}), label="Исключаемые города:", required=False)
+    query_text = forms.CharField(widget=forms.Textarea(attrs={'rows':2}), label="Запрос:", help_text="*Обязательное поле")
+    include_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':2, 'placeholder': 'По умолчанию — вся Россия'}), label="Города и области поиска:", required=False, help_text = "Каждый город или область на отдельной строке")
+    exclude_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':2}), label="Исключаемые города:", required=False)
     from_date = forms.DateField(widget=forms.DateInput(format="%d-%m-%Y", attrs={'placeholder': 'По умолчанию — все активные вакансии'}), label="Ограничение по дате:", help_text="Формат: ДД-ММ-ГГГГ", required=False, input_formats=['%d-%m-%Y'])
+    exclude_quota = forms.BooleanField(label="Убрать вакансии, требующие места в квоте", required=False)
 
     russia_areas = []
     russia_id = 113
@@ -31,8 +32,9 @@ class QueryForm(forms.Form):
         if data is not None:
             data_check = data
             data_check = data_check.split()
-            if data_check[-1].strip().lower() == "or":
-                raise ValidationError('Запрос не должен заканчиваться на "OR".')
+            if len(data_check) > 1:
+                if data_check[-1].strip().lower() == "or":
+                    raise ValidationError('Запрос не должен заканчиваться на "OR".')
         return data
         
     def clean_include_areas(self):

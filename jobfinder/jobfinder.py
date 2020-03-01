@@ -18,7 +18,7 @@ def load_companies(path):
         comp_ids.append(s[23:])
     return comp_ids
 
-def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str):
+def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota):
     # read query from file
     query = query.split()
     query_string = ""
@@ -63,6 +63,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     companies_ids = list(companies_ids)
     
     # parameters of query to hh
+    if query_string == "-":
+        query_string = ""
     par = {'text': query_string,
            'area': areas_ids,
            'per_page': '100',
@@ -71,6 +73,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
            'date_from': date_from,
            'page': 0}
     
+    if query_string == "":
+        query_string = "-"
     # request to hh to get all vacancies
     all_pages = []
     first_page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par)
@@ -99,12 +103,23 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
         vacancies = page['items']
         for vac in vacancies:
             excluded = False
+            quota_required = False
+            reason = ""
             for excluded_area in excluded_areas_list:
                 if excluded_area.lower() == vac['area']['name'].lower():
                     excluded = True
             if (vac['employer']['id'] in only_moscow_ids) and not (vac['area']['name'].lower() == 'москва' or vac['area']['name'].lower() == 'зеленоград'):
-                excluded = True
+                quota_required = True
+                reason = "компания зарегистрирована в Москве"
             if (vac['employer']['id'] in only_spb_ids) and not (vac['area']['name'].lower() == 'санкт-петербург'):
+                quota_required = True
+                reason = "компания зарегистрирована в Санкт-Петербурге"
+            if quota_required and (vac['area']['name'].lower() == 'москва' or vac['area']['name'].lower() == 'зеленоград' or vac['area']['name'].lower() == 'санкт-петербург'):
+                quota_required = False
+            if vac['area']['name'].lower() == 'зеленоград':
+                quota_required = True
+                reason = "Зеленоград входит в состав Москвы"
+            if quota_required and exclude_quota:
                 excluded = True
             if not excluded:
                 # get salary
@@ -153,6 +168,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
                 vac_info['in_akadempark'] = vac['employer']['id'] in akadempark_ids
                 vac_info['in_zapsib'] = vac['employer']['id'] in zapsib_ids
                 vac_info['in_ankudinovka'] = vac['employer']['id'] in ankudinovka_ids
+                vac_info['quota_required'] = quota_required
+                vac_info['reason'] = reason
                 vacancies_list.append(vac_info)
                 counter += 1
                 

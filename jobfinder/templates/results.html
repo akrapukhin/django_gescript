@@ -49,6 +49,7 @@
 					    <td align="center"><a href="{{ vac.emp_url }}" target="_blank"><img src="{{ vac.logo }}"></a></td>
 					    <td>{{ vac.area }}</td>
 					    <td>
+							{% if vac.quota_required %} <a href="http://educationglobal.ru/ns/participant/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/quota_16x16.png" alt="Квота" title="Требуется место в квоте, т.к. {{ vac.reason }}"></a> {% endif %}
 							{% if vac.in_main %} <a href="http://educationglobal.ru/ns/participant/employment/" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/main_small.png" alt="Основной" title="Утвержденный перечень"></a> {% endif %}
 							{% if vac.in_sk %} <a href="http://sk.ru/net/participants/p/index.aspx" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/sk.png" alt="Сколково" title="Резидент Сколково"></a> {% endif %}
 							{% if vac.in_p218 %} <a href="http://p218.ru/winners" target="_blank"><img src="https://raw.githubusercontent.com/akrapukhin/jf_images/master/p218.png" alt="п218" title="Постановление №218"></a> {% endif %}
