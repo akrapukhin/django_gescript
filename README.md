@@ -1,2 +1,4 @@
 # django_gescript
-Script to search fpr hh.ru vacancies among allowed employers
+Сайт для поиска вакансий на hh.ru среди компаний из утвержденного списка работодателей программы "Глобальное Образование" (http://educationglobal.ru/ns/participant/employment/).<br>
+Написан на Django.<br>
+Хостится на Heroku: https://gescript.herokuapp.com/
