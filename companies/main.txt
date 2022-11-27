@@ -26,7 +26,6 @@ https://hh.ru/employer/210727
 https://hh.ru/employer/901158
 https://hh.ru/employer/232855
 https://hh.ru/employer/4581
-https://hh.ru/employer/1226104
 https://hh.ru/employer/522
 https://hh.ru/employer/84201
 https://hh.ru/employer/1626392
@@ -44,7 +43,6 @@ https://hh.ru/employer/640559
 https://hh.ru/employer/577743
 https://hh.ru/employer/1407971
 https://hh.ru/employer/135778
-https://hh.ru/employer/856701
 https://hh.ru/employer/1796383
 https://hh.ru/employer/941763
 https://hh.ru/employer/689
@@ -156,12 +154,10 @@ https://hh.ru/employer/1022665
 https://hh.ru/employer/147672
 https://hh.ru/employer/746080
 https://hh.ru/employer/212584
-https://hh.ru/employer/1635368
 https://hh.ru/employer/3127
 https://hh.ru/employer/681883
 https://hh.ru/employer/65093
 https://hh.ru/employer/1174067
-https://hh.ru/employer/72539
 https://hh.ru/employer/3337
 https://hh.ru/employer/2831566
 https://hh.ru/employer/1364790
@@ -230,7 +226,6 @@ https://hh.ru/employer/19886
 https://hh.ru/employer/108257
 https://hh.ru/employer/1938912
 https://hh.ru/employer/2130926
-https://hh.ru/employer/32177
 https://hh.ru/employer/4585
 https://hh.ru/employer/890007
 https://hh.ru/employer/2059050
@@ -256,9 +251,7 @@ https://hh.ru/employer/1441182
 https://hh.ru/employer/1655255
 https://hh.ru/employer/2551607
 https://hh.ru/employer/2142115
-https://hh.ru/employer/733894
 https://hh.ru/employer/40951
-https://hh.ru/employer/631785
 https://hh.ru/employer/4132553
 https://hh.ru/employer/3809
 https://hh.ru/employer/1500764
@@ -337,14 +330,12 @@ https://hh.ru/employer/3228934
 https://hh.ru/employer/3619028
 https://hh.ru/employer/806209
 https://hh.ru/employer/3362329
-https://hh.ru/employer/2097742
 https://hh.ru/employer/1725529
 https://hh.ru/employer/3619952
 https://hh.ru/employer/3278837
 https://hh.ru/employer/1445997
 https://hh.ru/employer/660
 https://hh.ru/employer/82010
-https://hh.ru/employer/813554
 https://hh.ru/employer/1176646
 https://hh.ru/employer/19616
 https://hh.ru/employer/660
@@ -515,7 +506,6 @@ https://hh.ru/employer/40606
 https://hh.ru/employer/4150698
 https://hh.ru/employer/726213
 https://hh.ru/employer/5466
-https://hh.ru/employer/78961
 https://hh.ru/employer/539794
 https://hh.ua/employer/965476
 https://hh.ru/employer/3332359
@@ -578,7 +568,6 @@ https://hh.ru/employer/828029
 https://hh.ru/employer/2960518
 https://hh.ru/employer/4069546
 https://hh.ru/employer/962026
-https://hh.ru/employer/1635368
 https://hh.ru/employer/6041
 https://hh.ru/employer/4576
 https://hh.ru/employer/113649
