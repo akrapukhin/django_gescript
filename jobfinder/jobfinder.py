@@ -77,7 +77,10 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
         query_string = "-"
     # request to hh to get all vacancies
     all_pages = []
-    first_page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par)
+    print("Query:")
+    print(query_string)
+    print()
+    first_page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par, timeout=120)
     print("Запрос отправлен. Подождите несколько секунд...")
     if str(first_page_vacancies)[11:14] != "200":
         exit()
@@ -93,7 +96,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     
     for page_num in range(num_of_pages - 1):
         par['page'] = page_num + 1
-        page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par)
+        page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par, timeout=120)
         page_vacancies = page_vacancies.json()
         all_pages.append(page_vacancies)
     
@@ -139,8 +142,9 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
                 # get logo
                 logo_str = ""
                 if vac['employer']['logo_urls'] is not None:
-                    if vac['employer']['logo_urls']['90'] is not None:
-                        logo_str = vac['employer']['logo_urls']['90']
+                    if '90' in vac['employer']['logo_urls']:
+                        if vac['employer']['logo_urls']['90'] is not None:
+                            logo_str = vac['employer']['logo_urls']['90']
     
                 vac_info = {}
                 vac_info['num'] = counter
