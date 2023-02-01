@@ -77,12 +77,19 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
         query_string = "-"
     # request to hh to get all vacancies
     all_pages = []
-    print("Query:")
-    print(query_string)
+    print()
+    print("|||||||||||||||||||||||||||||||||||")
+    print("query:", query_string)
+    print("areas:", areas)
+    print("excluded_areas:", excluded_areas_list)
+    print("date_from:", date_from)
+    print("exclude_quota:", exclude_quota)
+    print("|||||||||||||||||||||||||||||||||||")
     print()
     first_page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par, timeout=120)
     print("Запрос отправлен. Подождите несколько секунд...")
     if str(first_page_vacancies)[11:14] != "200":
+        print("HH RESPONSE NOT OK!", str(first_page_vacancies)[:14])
         exit()
 
     first_page_vacancies = first_page_vacancies.json()

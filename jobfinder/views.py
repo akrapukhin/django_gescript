@@ -30,8 +30,7 @@ def query(request):
             exclude_quota = form.cleaned_data['exclude_quota']
             request.session['exclude_quota'] = exclude_quota
             num_vacancies, num_of_vacancies_total, vacancies_list, query_str, date_str, num_of_comp_str, warning2000 = find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota)
-            print("vacancies_list size:")
-            print(len(vacancies_list))
+            print("vacancies_list size:", len(vacancies_list))
             context = {
                 'num_vacancies': num_vacancies,
                 'num_of_vacancies_total': num_of_vacancies_total,
