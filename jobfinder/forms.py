@@ -6,7 +6,7 @@ import requests
 class QueryForm(forms.Form):
     query_text = forms.CharField(widget=forms.Textarea(attrs={'rows':2}), label="Запрос:")
     include_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':2, 'placeholder': 'По умолчанию — вся Россия'}), label="Города и области поиска:", required=False, help_text = "Каждый город или область на отдельной строке")
-    exclude_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':2, 'placeholder': 'Можно указать Москву и Санкт-Петербург, чтобы убрать квотированные вакансии'}), label="Исключаемые города:", required=False')
+    exclude_areas = forms.CharField(widget=forms.Textarea(attrs={'rows':2, 'placeholder': 'Можно указать Москву и Санкт-Петербург, чтобы убрать квотированные вакансии'}), label="Исключаемые города:", required=False)
     exclude_quota = forms.BooleanField(label="Убрать квотированные вакансии вне Мск/СПб", required=False)
     from_date = forms.DateField(widget=forms.DateInput(format="%d-%m-%Y", attrs={'placeholder': 'По умолчанию — все активные вакансии'}), label="Ограничение по дате:", help_text="Формат: ДД-ММ-ГГГГ", required=False, input_formats=['%d-%m-%Y'])
     
