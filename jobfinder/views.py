@@ -24,6 +24,7 @@ def query(request):
             excluded_areas, excluded_areas_list, excluded_areas_str = form.cleaned_data['exclude_areas']
             request.session['excluded_areas'] = excluded_areas
             date_from = form.cleaned_data['from_date']
+            print("form date_from:", date_from, type(date_from))
             if date_from is not None:
                 date_from = date_from.strftime("%d-%m-%Y")
             request.session['date_from'] = date_from
