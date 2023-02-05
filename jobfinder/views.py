@@ -30,7 +30,7 @@ def query(request):
             request.session['date_from'] = date_from
             exclude_quota = form.cleaned_data['exclude_quota']
             request.session['exclude_quota'] = exclude_quota
-            num_vacancies, num_of_vacancies_total, vacancies_list, query_str, date_str, num_of_comp_str, warning2000 = find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota)
+            num_vacancies, num_of_vacancies_total, vacancies_list, query_str, date_str, num_of_comp_str, warning2000, warning_not_excluded, warning_quota = find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota)
             print("vacancies_list size:", len(vacancies_list))
             context = {
                 'num_vacancies': num_vacancies,
@@ -42,6 +42,8 @@ def query(request):
                 'num_of_comp': num_of_comp_str,
                 'vacancies': vacancies_list,
                 'warning2000': warning2000,
+                'warning_not_excluded' : warning_not_excluded,
+                'warning_quota': warning_quota,
             }
             counter = ViewCounter.objects.filter(name='totalCounter')
             counter.update(counter=F('counter') + 1)

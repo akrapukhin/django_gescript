@@ -190,5 +190,22 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     warning2000 = False
     if num_of_vacancies_total > 2000:
         warning2000 = True
-    return num_of_vacancies, num_of_vacancies_total, vacancies_list, query_string, date_from_format_day_first, str(len(companies_ids)), warning2000
+    
+    excluded_areas_list_small = []
+    for a in excluded_areas_list:
+        excluded_areas_list_small.append(a.lower())
+
+    warning_not_excluded = False
+    warning_quota = False
+
+    moscow_excluded = 'москва' in excluded_areas_list_small
+    spb_excluded = 'санкт-петербург' in excluded_areas_list_small
+
+    if exclude_quota and not (moscow_excluded and spb_excluded):
+        warning_not_excluded = True
+
+    if not exclude_quota and (moscow_excluded or spb_excluded):
+        warning_quota = True
+
+    return num_of_vacancies, num_of_vacancies_total, vacancies_list, query_string, date_from_format_day_first, str(len(companies_ids)), warning2000, warning_not_excluded, warning_quota
     
