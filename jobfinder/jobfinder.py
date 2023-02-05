@@ -2,6 +2,7 @@ import requests
 import codecs
 import urllib.request
 import webbrowser
+import time
 
 def load_companies(path):
     companies = []
@@ -19,6 +20,7 @@ def load_companies(path):
     return comp_ids
 
 def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str, excluded_areas_list, excluded_areas_str, exclude_quota):
+    start_time = time.time()
     # read query from file
     query = query.split()
     query_string = ""
@@ -86,6 +88,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print("exclude_quota:", exclude_quota)
     print("|||||||||||||||||||||||||||||||||||")
     print()
+    start_req_time = time.time()
     first_page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par, timeout=120)
     print("Запрос отправлен. Подождите несколько секунд...")
     if str(first_page_vacancies)[11:14] != "200":
@@ -106,6 +109,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
         page_vacancies = requests.get('https://api.hh.ru/vacancies', params=par, timeout=120)
         page_vacancies = page_vacancies.json()
         all_pages.append(page_vacancies)
+    stop_req_time = time.time()
     
     counter = 1
     vacancies_list = []
@@ -207,5 +211,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     if not exclude_quota and (moscow_excluded or spb_excluded):
         warning_quota = True
 
+    print("find_vacancies() time:", time.time() - start_time)
+    print("req time:", stop_req_time - start_req_time)
     return num_of_vacancies, num_of_vacancies_total, vacancies_list, query_string, date_from_format_day_first, str(len(companies_ids)), warning2000, warning_not_excluded, warning_quota
     
