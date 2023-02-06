@@ -3,6 +3,7 @@ import codecs
 import urllib.request
 import webbrowser
 import time
+import os
 
 def load_companies(path):
     companies = []
@@ -82,11 +83,15 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print()
     print("|||||||||||||||||||||||||||||||||||")
     print("query:", query_string)
+    with open("test.txt", "a") as file_object:
+        file_object.write(f"{time.time()}")
     print("TRUDVSEM", requests.get(f"http://opendata.trudvsem.ru/api/v1/vacancies/company/inn/7726700943"))
     print("areas:", areas)
     print("excluded_areas:", excluded_areas_list)
     print("date_from:", date_from)
     print("exclude_quota:", exclude_quota)
+    with open("test.txt", "r") as file_object:
+        print(file_object.readlines())
     print("|||||||||||||||||||||||||||||||||||")
     print()
     start_req_time = time.time()
