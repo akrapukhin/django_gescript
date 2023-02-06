@@ -4,6 +4,20 @@ import urllib.request
 import webbrowser
 import time
 import os
+import threading
+
+class MyWorker():
+    def __init__(self):
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+    def run(self):
+        for _ in range(10):
+            time.sleep(1)
+            with open("test.txt", "a") as file_object:
+                file_object.write(f"{time.time()}\n")
+
 
 def load_companies(path):
     companies = []
@@ -91,7 +105,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print("date_from:", date_from)
     print("exclude_quota:", exclude_quota)
     with open("test.txt", "r") as file_object:
-        print(file_object.readlines())
+        for line in file_object.readlines():
+            print(line)
     print("|||||||||||||||||||||||||||||||||||")
     print()
     start_req_time = time.time()
@@ -222,5 +237,8 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print("req time:", stop_req_time - start_req_time)
     print("num_of_vacancies_total", num_of_vacancies_total)
     print("num_of_pages:", num_of_pages)
+    print("before MyWorker()")
+    MyWorker()
+    print("after MyWorker()")
     return num_of_vacancies, num_of_vacancies_total, vacancies_list, query_string, date_from_format_day_first, str(len(companies_ids)), warning2000, warning_not_excluded, warning_quota
     
