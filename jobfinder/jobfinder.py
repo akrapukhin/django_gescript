@@ -84,7 +84,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print("|||||||||||||||||||||||||||||||||||")
     print("query:", query_string)
     with open("test.txt", "a") as file_object:
-        file_object.write(f"{time.time()}")
+        file_object.write(f"{time.time()}\n")
     print("TRUDVSEM", requests.get(f"http://opendata.trudvsem.ru/api/v1/vacancies/company/inn/7726700943"))
     print("areas:", areas)
     print("excluded_areas:", excluded_areas_list)
