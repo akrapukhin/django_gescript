@@ -12,3 +12,4 @@ sqlparse==0.3.0
 urllib3==1.25.8
 psycopg2-binary==2.7.7
 whitenoise==5.0.1
+wget

@@ -5,6 +5,7 @@ import webbrowser
 import time
 import os
 import threading
+import wget
 
 class MyWorker():
     def __init__(self):
@@ -13,10 +14,8 @@ class MyWorker():
         thread.start()
 
     def run(self):
-        for _ in range(10):
-            time.sleep(1)
-            with open("test.txt", "a") as file_object:
-                file_object.write(f"{time.time()}\n")
+        url = "https://файлы.президентскиегранты.рф/81cf9ab5-07f9-4272-a058-ec578b4e4c61"
+        file = wget.download(url)
 
 
 def load_companies(path):
@@ -96,6 +95,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     all_pages = []
     print()
     print("|||||||||||||||||||||||||||||||||||")
+    print("LS:", os.listdir())
     print("query:", query_string)
     with open("test.txt", "a") as file_object:
         file_object.write(f"{time.time()}\n")
@@ -106,7 +106,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print("exclude_quota:", exclude_quota)
     with open("test.txt", "r") as file_object:
         for line in file_object.readlines():
-            print(line)
+            print(line.strip())
     print("|||||||||||||||||||||||||||||||||||")
     print()
     start_req_time = time.time()
