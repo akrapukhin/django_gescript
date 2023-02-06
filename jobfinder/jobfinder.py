@@ -82,6 +82,7 @@ def find_vacancies(query, areas, excluded_areas, date_from, areas_ids, areas_str
     print()
     print("|||||||||||||||||||||||||||||||||||")
     print("query:", query_string)
+    print("TRUDVSEM", requests.get(f"http://opendata.trudvsem.ru/api/v1/vacancies/company/inn/7726700943"))
     print("areas:", areas)
     print("excluded_areas:", excluded_areas_list)
     print("date_from:", date_from)
