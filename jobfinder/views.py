@@ -81,5 +81,6 @@ def trud(request):
     context = {
         'dummy': 0,
     }
-    subprocess.run(["wget", "https://github.com/akrapukhin/jf_images/blob/master/trud.html", "templates/"])
+    result = subprocess.run(["wget", "https://github.com/akrapukhin/jf_images/blob/master/trud.html", "templates/"])
+    print("LOAD FROM GITHUB", result.returncode)
     return render(request, 'trud.html', context)
