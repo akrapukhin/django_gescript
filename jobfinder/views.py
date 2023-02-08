@@ -7,6 +7,8 @@ from jobfinder.jobfinder import find_vacancies
 from jobfinder.forms import QueryForm
 from datetime import datetime
 from django.db.models import F
+
+import subprocess
 def query(request):
     # If this is a POST request then process the Form data
     if request.method == 'POST':
@@ -74,3 +76,10 @@ def counters(request):
         'unique': unique,
     }
     return render(request, 'counters.html', context)
+
+def trud(request):
+    context = {
+        'dummy': 0,
+    }
+    subprocess.run(["wget", "https://github.com/akrapukhin/jf_images/blob/master/trud.html", "templates/"])
+    return render(request, 'trud.html', context)

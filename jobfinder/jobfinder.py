@@ -5,7 +5,6 @@ import webbrowser
 import time
 import os
 import threading
-import wget
 
 class MyWorker():
     def __init__(self):
@@ -14,8 +13,8 @@ class MyWorker():
         thread.start()
 
     def run(self):
-        url = "https://файлы.президентскиегранты.рф/81cf9ab5-07f9-4272-a058-ec578b4e4c61"
-        file = wget.download(url)
+        url = "xn--80asg7a0b.xn--80afcdbalict6afooklqi5o.xn--p1ai"
+        print("NOTHING")
 
 
 def load_companies(path):
